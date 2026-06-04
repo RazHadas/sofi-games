@@ -225,6 +225,6 @@ renderCurrent();
 </body>
 </html>`;
 
-fs.writeFileSync('c:/Users/meira/sofi-games/index.html', html, 'utf8');
-const size = fs.statSync('c:/Users/meira/sofi-games/index.html').size;
+fs.writeFileSync('c:/Users/meira/sofi-games/animals.html', html, 'utf8');
+const size = fs.statSync('c:/Users/meira/sofi-games/animals.html').size;
 console.log('Written:', size, 'bytes (' + (size/1024).toFixed(1) + ' KB)');
