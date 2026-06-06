@@ -243,10 +243,11 @@ renderCurrent();
 (function(){
   const btn = document.getElementById('fsbtn');
   function isFS() { return !!(document.fullscreenElement || document.webkitFullscreenElement); }
-  function enterFS() { const el = document.documentElement; (el.requestFullscreen || el.webkitRequestFullscreen).call(el); }
+  function enterFS() { const el = document.documentElement; (el.requestFullscreen || el.webkitRequestFullscreen).call(el).catch(()=>{}); }
   function exitFS()  { (document.exitFullscreen || document.webkitExitFullscreen).call(document); }
 
-  if (sessionStorage.getItem('fs') === '1') enterFS();
+  if (sessionStorage.getItem('fs') === '1')
+    document.addEventListener('pointerdown', enterFS, { once: true, capture: true });
 
   btn.addEventListener('pointerdown', function(e) {
     e.stopPropagation(); btn.style.opacity = '1';
