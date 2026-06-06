@@ -120,16 +120,16 @@
       z-index:10;
     }
 
-    /* Tablet: make cards fill more vertical space */
+    /* Tablet 1280×800: fill the screen */
     @media (min-width:600px) {
       .card {
         aspect-ratio: auto;
-        min-height: clamp(240px, min(38vw, 56vh), 420px);
-        flex: 1 1 clamp(200px, 26vw, 300px);
-        max-width: 320px;
+        min-height: clamp(240px, 60vh, 480px);
+        flex: 1 1 clamp(220px, 28vw, 360px);
+        max-width: 380px;
       }
-      .card-emoji { font-size: clamp(72px, 12vw, 140px); }
-      #cards      { max-width: 1020px; }
+      .card-emoji { font-size: clamp(72px, 14vw, 160px); }
+      #cards      { max-width: 1200px; }
     }
   </style>
 </head>
