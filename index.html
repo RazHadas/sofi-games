@@ -119,6 +119,18 @@
       letter-spacing:3px;
       z-index:10;
     }
+
+    /* Tablet: make cards fill more vertical space */
+    @media (min-width:600px) {
+      .card {
+        aspect-ratio: auto;
+        min-height: clamp(240px, min(38vw, 56vh), 420px);
+        flex: 1 1 clamp(200px, 26vw, 300px);
+        max-width: 320px;
+      }
+      .card-emoji { font-size: clamp(72px, 12vw, 140px); }
+      #cards      { max-width: 1020px; }
+    }
   </style>
 </head>
 <body>
