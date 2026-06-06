@@ -57,7 +57,14 @@ window.addEventListener('resize', resize);
 // ─── Pop sound (Web Audio) ────────────────────────────────────────
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
+// Resume AudioContext on first touch (required on mobile)
+document.addEventListener('pointerdown', function unlock() {
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  document.removeEventListener('pointerdown', unlock);
+}, { once: true });
+
 function popSound(pitch = 1) {
+  if (audioCtx.state === 'suspended') audioCtx.resume();
   const osc  = audioCtx.createOscillator();
   const gain = audioCtx.createGain();
   osc.connect(gain); gain.connect(audioCtx.destination);

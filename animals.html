@@ -73,11 +73,11 @@ const ANIMALS = [
   { name:'פרה',    emoji:'🐮', bg:['#27ae60','#2ecc71'], sound:'cow',      floats:['🌿','🥛','💚'] },
   { name:'ברווז',  emoji:'🦆', bg:['#3498db','#74b9ff'], sound:'duck',     floats:['💧','🌊','💙'] },
   { name:'אריה',   emoji:'🦁', bg:['#e67e22','#f9ca24'], sound:'lion',     floats:['⭐','👑','🧡'] },
-  { name:'פיל',    emoji:'🐘', bg:['#636e72','#b2bec3'], sound:'elephant', floats:['🥜','🌴','🩶'] },
+  { name:'פיל',    emoji:'🐘', bg:['#636e72','#b2bec3'], sound:'elephant', floats:['🥜','🌴','🤍'] },
   { name:'צפרדע',  emoji:'🐸', bg:['#00b894','#55efc4'], sound:'frog',     floats:['🪲','💧','🟢'] },
-  { name:'חזיר',   emoji:'🐷', bg:['#fd79a8','#e84393'], sound:'pig',      floats:['🌸','🍎','🩷'] },
+  { name:'חזיר',   emoji:'🐷', bg:['#fd79a8','#e84393'], sound:'pig',      floats:['🌸','🍎','💗'] },
   { name:'תרנגול', emoji:'🐓', bg:['#fdcb6e','#e17055'], sound:'rooster',  floats:['🌞','🥚','⭐'] },
-  { name:'חמור',   emoji:'🫏', bg:['#a29bfe','#6c5ce7'], sound:'donkey',   floats:['🌾','🏔️','💜'] },
+  { name:'חמור',   emoji:'🐴', bg:['#a29bfe','#6c5ce7'], sound:'donkey',   floats:['🌾','🏔️','💜'] },
 ];
 
 let current = 0, isDragging = false, startX = 0, dragX = 0;
@@ -85,14 +85,22 @@ const MIN_SWIPE = 80;
 const stage = document.getElementById('stage');
 const dotsEl = document.getElementById('dots');
 
+// Pre-load all sounds to eliminate first-play delay
+const audioCache = {};
+Object.keys(SOUNDS).forEach(function(k) {
+  const a = new Audio(SOUNDS[k]);
+  a.preload = 'auto';
+  audioCache[k] = a;
+});
+
 let currentAudio = null;
 function playSound(name) {
-  if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; currentAudio = null; }
-  if (name === 'pig') { pigOink(); return; }
-  if (SOUNDS[name]) {
-    currentAudio = new Audio(SOUNDS[name]);
-    currentAudio.play().catch(() => {});
-  }
+  if (currentAudio) { currentAudio.pause(); currentAudio.currentTime = 0; }
+  if (name === 'pig') { pigOink(); currentAudio = null; return; }
+  if (!audioCache[name]) return;
+  currentAudio = audioCache[name];
+  currentAudio.currentTime = 0;
+  currentAudio.play().catch(() => {});
 }
 
 (function buildStars() {
