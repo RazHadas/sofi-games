@@ -84,8 +84,6 @@
     document.addEventListener('gesturestart', function(e){ e.preventDefault(); });
     document.addEventListener('touchmove', function(e){ if(e.touches.length>1) e.preventDefault(); }, { passive:false });
     document.addEventListener('touchstart', function(e){ if(e.touches.length>1) e.preventDefault(); }, { passive:false });
-    var _lte=0;
-    document.addEventListener('touchend', function(e){ var n=Date.now(); if(n-_lte<300) e.preventDefault(); _lte=n; }, { passive:false });
   </script>
 </head>
 <body>
