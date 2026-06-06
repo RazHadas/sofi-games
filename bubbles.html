@@ -239,13 +239,16 @@ loop();
 <script>
 (function(){
   const btn = document.getElementById('fsbtn');
+  function isFS() { return !!(document.fullscreenElement || document.webkitFullscreenElement); }
+  function enterFS() { const el = document.documentElement; (el.requestFullscreen || el.webkitRequestFullscreen).call(el); }
+  function exitFS()  { (document.exitFullscreen || document.webkitExitFullscreen).call(document); }
+
+  if (sessionStorage.getItem('fs') === '1') enterFS();
+
   btn.addEventListener('pointerdown', function(e) {
     e.stopPropagation(); btn.style.opacity = '1';
-    const el = document.documentElement;
-    if (!document.fullscreenElement && !document.webkitFullscreenElement)
-      (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
-    else
-      (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+    if (!isFS()) { enterFS(); sessionStorage.setItem('fs', '1'); }
+    else         { exitFS();  sessionStorage.removeItem('fs'); }
     setTimeout(() => btn.style.opacity = '0.35', 300);
   });
 })();
