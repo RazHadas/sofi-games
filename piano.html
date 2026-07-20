@@ -91,7 +91,10 @@
 <div id="keys"></div>
 
 <script src="theme.js"></script>
+<script src="score.js"></script>
 <script>
+const SCORE = initScore('piano');
+
 // ─── Time theme ────────────────────────────────────────────────
 const bg = document.getElementById('bg');
 applyTimeTheme(bg);
@@ -154,6 +157,7 @@ KEYS.forEach((k, idx) => {
 
 function trigger(keyEl, k, x, y) {
   playNote(k.freq);
+  SCORE.add();
 
   // Press flash
   keyEl.classList.add('pressed');

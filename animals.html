@@ -45,7 +45,9 @@
   <div id="dots"></div>
 </div>
 <script src="theme.js"></script>
+<script src="score.js"></script>
 <script>
+const SCORE = initScore('animals');
 // Apply time-based background
 (function() {
   const bg = document.getElementById('bg');
@@ -216,6 +218,7 @@ function attachCardEvents(card) {
     const dt = Date.now() - tapTime;
     if (dist < 20 && dt < 600) {
       playSound(ANIMALS[current].sound);
+      SCORE.add();
       showRipple(card);
       floatEmojis(e.clientX, e.clientY, ANIMALS[current].floats);
     } else if (Math.abs(dragX) >= MIN_SWIPE) {

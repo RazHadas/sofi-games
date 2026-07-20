@@ -29,7 +29,10 @@
 <canvas id="c"></canvas>
 
 <script src="theme.js"></script>
+<script src="score.js"></script>
 <script>
+const SCORE = initScore('fireworks');
+
 // ─── Time theme ───────────────────────────────────────────────────
 const bg = document.getElementById('bg');
 function refreshTheme() { applyTimeTheme(bg); }
@@ -136,6 +139,7 @@ class Spark {
 const sparks = [];
 
 function burst(x, y) {
+  SCORE.add();
   const palette = PALETTES[Math.floor(Math.random() * PALETTES.length)];
   const count = 45 + Math.floor(Math.random() * 20);
   for (let i = 0; i < count; i++) {

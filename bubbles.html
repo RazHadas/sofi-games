@@ -42,7 +42,10 @@
 <canvas id="c"></canvas>
 
 <script src="theme.js"></script>
+<script src="score.js"></script>
 <script>
+const SCORE = initScore('bubbles');
+
 // ─── Time theme ───────────────────────────────────────────────────
 const bg = document.getElementById('bg');
 function refreshTheme() { applyTimeTheme(bg); }
@@ -197,6 +200,7 @@ function tryPop(px, py) {
     if (b.contains(px, py)) {
       b.alive = false;
       popSound(0.7 + Math.random() * 0.6);
+      SCORE.add();
 
       // Spawn burst particles
       for (let j = 0; j < 14; j++)
