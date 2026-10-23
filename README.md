@@ -21,6 +21,9 @@
 | 🎹 **Piano** (פסנתר) | Full-screen rainbow keys, pentatonic notes, multi-touch |
 | 🎆 **Fireworks** (זיקוקים) | Tap **anywhere** — fireworks explode at the finger with boom & crackle |
 | 🖍️ **Drawing** (ציור) | Finger paints glowing rainbow strokes with sparkles and musical tones; canvas slowly self-clears |
+| 🪄 **Magic Sticks** (מקלות קסם) | Build the shown shape with colored sticks; the camera compares it to the target and shows a match %. Opens in demo mode without a camera. Play: https://razhadas.github.io/sofi-games/sticks.html |
+
+*Magic Sticks is an early prototype: a light in-browser geometric matcher (stick colors → lines → template). It is not yet robust to rotation, busy backgrounds, hidden sticks or changing light. Camera requires HTTPS and permission.*
 
 Every game shows a tap score and remembers the all-time best (⭐ current / 🏆 best, stored in `localStorage`).
 
